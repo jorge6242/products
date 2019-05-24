@@ -16,9 +16,14 @@ Route::get('/', function () {
 });
 
 Route::prefix('api')->group(function () {
-    Route::get('/product', 'ProductController@index');
-    Route::get('/product/{id}', 'ProductController@show');
-    Route::put('/product/{id}', 'ProductController@update');
-    Route::delete('/product/{id}', 'ProductController@destroy');
-    Route::post('/product', 'ProductController@store');
+    Route::post('login', 'AuthController@login');
+    Route::post('register', 'AuthController@register');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('/product', 'ProductController@index');
+        Route::get('/product/{id}', 'ProductController@show');
+        Route::put('/product/{id}', 'ProductController@update');
+        Route::delete('/product/{id}', 'ProductController@destroy');
+        Route::post('/product', 'ProductController@store');
+        Route::post('getUser', 'AuthController@getUser');
+        });
 });
