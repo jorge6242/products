@@ -15,3 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/product', 'ProductController@index');
+Route::get('/product/{id}', 'ProductController@show');
+Route::put('/product/{id}', 'ProductController@update');
+Route::delete('/product/{id}', 'ProductController@destroy');
+Route::post('/product', 'ProductController@store');

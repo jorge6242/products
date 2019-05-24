@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\ProductService;
+use App\Product;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller {
     protected $productservice;
@@ -17,8 +19,8 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $posts = $this->productservice->index();
-        return $posts;
+        $products = $this->productservice->index();
+        return $products;
     }
 
     /**
@@ -39,7 +41,8 @@ class ProductController extends Controller {
      */
     public function store(Request $request)
     {
-        //
+        $product = $this->productservice->create($request);
+        return $product; 
     }
 
     /**
@@ -48,9 +51,9 @@ class ProductController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        $product = $this->productservice->read($id);
+        return $product; 
     }
 
     /**
@@ -71,9 +74,9 @@ class ProductController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $product = $this->productservice->update($request, $id);
+        return \Response::json($product);
     }
 
     /**
@@ -82,8 +85,8 @@ class ProductController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+    $product = $this->productservice->delete($id);
+    return \Response::json($product);
     }
 }
