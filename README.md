@@ -1,2 +1,11 @@
-# products
-Product Example with ReactJS and Laravel 5
+# Backend Products Example
+
+## Tecnologies
+
+-   Laravel 5
+
+## Installation
+
+-   `composer install`
+
+-   `php artisan serve --port=18081`
