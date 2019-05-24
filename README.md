@@ -7,5 +7,6 @@
 ## Installation
 
 -   `composer install`
-
+-   `php artisan migrate`
+-   `php artisan migrate`
 -   `php artisan serve --port=18081`
