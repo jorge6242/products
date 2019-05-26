@@ -12,25 +12,20 @@ class ProductController extends Controller {
     public function __construct(ProductService $productservice)
 	{
 		$this->productservice = $productservice;
-	}
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() {
-        $products = $this->productservice->index();
-        return $products;
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     *
+     * Get the resources from storage 
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+
+    public function index() {
+        /** @var  $products */
+        $products = $this->productservice->index();
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ]);
     }
 
     /**
@@ -41,8 +36,14 @@ class ProductController extends Controller {
      */
     public function store(Request $request)
     {
-        $product = $this->productservice->create($request);
-        return $product; 
+        $productRequest = $request->all();
+        $product = $this->productservice->create($productRequest);
+        if ($product) {
+            return response()->json([
+                'success' => true,
+                'data' => $product
+            ]);
+        }
     }
 
     /**
@@ -53,18 +54,12 @@ class ProductController extends Controller {
      */
     public function show($id) {
         $product = $this->productservice->read($id);
-        return $product; 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        if($product) {
+            return response()->json([
+                'success' => true,
+                'data' => $product
+            ]);
+        }
     }
 
     /**
@@ -75,8 +70,14 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $product = $this->productservice->update($request, $id);
-        return \Response::json($product);
+        $productRequest = $request->all();
+        $product = $this->productservice->update($productRequest, $id);
+        if($product) {
+            return response()->json([
+                'success' => true,
+                'data' => $product
+            ]);
+        }
     }
 
     /**
@@ -87,6 +88,11 @@ class ProductController extends Controller {
      */
     public function destroy($id) {
     $product = $this->productservice->delete($id);
-    return \Response::json($product);
+    if($product) {
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ]);
+    }
     }
 }
