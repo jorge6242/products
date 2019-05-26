@@ -3,6 +3,7 @@
 ## Tecnologies
 
 -   Laravel 5
+-   Passport RESTful API
 
 ## Installation
 
