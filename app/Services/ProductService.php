@@ -16,14 +16,12 @@ class ProductService {
 		return $this->product->all();
 	}
 
-	public function create(Request $request) {
-		$attributes = $request->all();
-		return $this->product->create($attributes);
+	public function create($request) {
+		return $this->product->create($request);
 	}
 
-	public function update(Request $request, $id) {
-	  $attributes = $request->all();
-      return $this->product->update($id, $attributes);
+	public function update($request, $id) {
+      return $this->product->update($id, $request);
 	}
 
 	public function read($id) {
